@@ -1,0 +1,23 @@
+# Ignore the vendor directory (where Composer installs libraries)
+vendor/
+node_modules/
+# Ignore composer lock file (optional)
+# Uncomment the next line if you want to ignore composer.lock
+# composer.lock
+
+# Ignore Composer's autoload file
+composer.phar
+
+# Ignore environment-specific files like .env
+.env
+
+# Ignore IDE configuration files
+.idea/
+.vscode/
+
+# Ignore logs, cache, and temporary files
+storage/logs/
+storage/framework/cache/
+storage/framework/sessions/
+storage/framework/views/
+bootstrap/cache/

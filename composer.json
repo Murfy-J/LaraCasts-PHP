@@ -1,0 +1,12 @@
+{
+  "name": "murfy/lara-casts-php",
+  "autoload": {
+    "psr-4": {
+      "Core\\": "Core/",
+      "Http\\": "Http/"
+    }
+  },
+  "require": {
+    "illuminate/collections": "^11.28"
+  }
+}
