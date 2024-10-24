@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Core\App;
 use Core\Database;
+use Core\User;
 
 $db = App::resolve(Database::class);
 
@@ -12,7 +13,7 @@ $db = App::resolve(Database::class);
 
 $heading = 'My Notes';
 
-$currentUserId = 5;
+$currentUserId = User::getUserID();
 
 $postID = $_POST["noteID"];
 

@@ -3,6 +3,7 @@
 
 use Core\App;
 use Core\Database;
+use Core\User;
 
 $_SESSION['guestShop'] = [
     'I AM' => 'Donkey'
@@ -10,7 +11,7 @@ $_SESSION['guestShop'] = [
 
 $db = App::resolve(Database::class);
 
-$currentUserId = 5;
+$currentUserId = User::getUserID();
 
 $notes = $db->query('SELECT * FROM notes where user_id = :id',
     [

@@ -4,9 +4,12 @@ declare(strict_types=1);
 
 use Core\App;
 use Core\Database;
+use Core\User;
+
+//use Core\User;
 
 $db = App::resolve(Database::class);
-$currentUser = 5;
+$currentUser = User::getUserID();
 
 //dd('We are in the edit controller');
 

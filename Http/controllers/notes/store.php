@@ -2,6 +2,7 @@
 
 use Core\App;
 use Core\Database;
+use Core\User;
 use Core\Validator;
 
 $db = App::resolve(Database::class);
@@ -9,7 +10,9 @@ $db = App::resolve(Database::class);
 
 $errors = array();
 
-$id = 5;
+$currentUserId = User::getUserID();
+
+dd($_SESSION);
 
 if (!Validator::string($_POST['body'], 1, 1000)) {
     $errors['body'][] = 'Body of 1000 characters or less is required';
@@ -25,9 +28,9 @@ if ($errors) {
 
 $body = htmlspecialchars($_POST['body']);
 
-$note = $db->query('INSERT INTO notes (`body`, `user_id`) VALUES (:body, :id)', [
+$note = $db->query('INSERT INTO notes (`body`, `user_id`) VALUES (:body, :currentUserId)', [
     'body' => $body,
-    'id' => $id
+    'currentUserId' => $currentUserId
 ]);
 
 header('Location: /notes

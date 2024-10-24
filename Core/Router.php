@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Core;
 
-use Core\Middleware\Middleware;
+use Core\middleware\Middleware;
 
 class Router
 {

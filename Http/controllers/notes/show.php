@@ -4,18 +4,19 @@ declare(strict_types=1);
 
 use Core\App;
 use Core\Database;
+use Core\User;
 
 $db = App::resolve(Database::class);
 
 $heading = 'My Notes';
-$currentUserId = 5;
+$currentUserId = User::getUserID();
 
 
 $id = $_GET['id'];
 
-$note = $db->query('SELECT * FROM notes WHERE id = :id', [
-    // 'user' => '5',
-    'id' => $id,
+$note = $db->query('SELECT * FROM notes WHERE id = :id and user_id = :currentUserId', [
+    ':id' => $id,
+    ':currentUserId' => $currentUserId
 ])->findOrFail();
 
 

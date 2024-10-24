@@ -2,11 +2,12 @@
 
 use Core\App;
 use Core\Database;
+use Core\User;
 use Core\Validator;
 
 $id = $_POST['noteId'];
 
-$currentUser = 5;
+$currentUserId = User::getUserID();
 
 $db = App::resolve(Database::class);
 
@@ -16,7 +17,7 @@ $note = $db->query('Select * from notes where id = :id', ['id' => $id])->findOrF
 
 // authorize  that the current sure can edit the data
 
-authorize($currentUser === $note['user_id']);
+authorize($currentUserId === $note['user_id']);
 
 //validate the form
 $errors = [];
@@ -26,7 +27,7 @@ if (!Validator::string($_POST['body'], 1, 1000)) {
 }
 
 if ($errors) {
-    
+
     view('notes/edit.view.php', [
         'heading' => 'Update a note',
         'errors' => $errors,
