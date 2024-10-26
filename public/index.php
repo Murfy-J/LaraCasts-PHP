@@ -1,17 +1,19 @@
 <?php
 
 declare(strict_types=1);
-
-session_start();
-
-
-use Core\Router;
-use Core\Session;
-use Core\ValidationException;
-
 const BASE_PATH = __DIR__ . '/../';
 
 require BASE_PATH . 'vendor/autoload.php';
+
+session_start();
+
+use Core\Router;
+use Core\Session;
+use Core\User;
+use Core\ValidationException;
+
+User::csrfToken();
+
 
 require BASE_PATH . 'Core/functions.php';
 dd($_SESSION);

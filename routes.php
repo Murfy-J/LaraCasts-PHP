@@ -16,13 +16,13 @@ $router->patch('/note', '/notes/update.php')->only('auth');;
 
 
 $router->get('/notes/create', '/notes/create.php')->only('auth');;
-$router->post('/notes', '/notes/store.php');
+$router->post('/notes', '/notes/store.php')->only('csrf');
 
 $router->get('/register', '/registration/create.php')->only('guest');
 $router->post('/register', '/registration/store.php');
 
 $router->get('/login', '/session/create.php')->only('guest');
-$router->post('/session', '/session/store.php');
+$router->post('/session', '/session/store.php')->only('csrf');
 $router->delete('/session', '/session/destroy.php');
 //require 'notesRoutes.php';
 

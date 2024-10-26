@@ -9,6 +9,7 @@ $_SESSION['guestShop'] = [
     'I AM' => 'Donkey'
 ];
 
+
 $db = App::resolve(Database::class);
 
 $currentUserId = User::getUserID();
