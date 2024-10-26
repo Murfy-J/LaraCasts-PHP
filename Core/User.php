@@ -37,10 +37,15 @@ class User
         ];
     }
 
+    public function newCsrfToken()
+    {
+        return $_SESSION['csrf_token'] = bin2hex(random_bytes(32));  // Create a 32-byte random token
+    }
+
     public static function csrfToken()
     {
         if (empty($_SESSION['csrf_token'])) {
-            return $_SESSION['csrf_token'] = bin2hex(random_bytes(32));  // Create a 32-byte random token
+            return (new static)->newCsrfToken();
         } else {
             return $_SESSION['csrf_token'];
         }

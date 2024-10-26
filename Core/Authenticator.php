@@ -33,6 +33,10 @@ class Authenticator
             'currentUserId' => $user['id'],
         ];
 
+        $_SESSION['csrf_token'] = [];
+        (new User)->newCsrfToken();
+
+
         session_regenerate_id(true);
     }
 

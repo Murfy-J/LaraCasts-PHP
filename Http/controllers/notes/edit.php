@@ -6,12 +6,9 @@ use Core\App;
 use Core\Database;
 use Core\User;
 
-//use Core\User;
-
 $db = App::resolve(Database::class);
-$currentUser = User::getUserID();
 
-//dd('We are in the edit controller');
+$currentUser = User::getUserID();
 
 $note = $db->query('SELECT * FROM notes WHERE id = :id', [
     ':id' => $_GET['id']
@@ -26,3 +23,5 @@ view('notes/edit.view.php', [
     'note' => $note,
     'errors' => []
 ]);
+
+

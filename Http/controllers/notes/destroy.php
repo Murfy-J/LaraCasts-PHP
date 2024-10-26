@@ -8,9 +8,6 @@ use Core\User;
 
 $db = App::resolve(Database::class);
 
-//dd('WE hit the destroy the notes');
-
-
 $heading = 'My Notes';
 
 $currentUserId = User::getUserID();
@@ -22,5 +19,5 @@ $note = $db->query("DELETE from notes where id = :id AND user_id = :currentUserI
     "currentUserId" => $currentUserId
 ]);
 
-header('location: /notes');
+redirect('/notes');
 die();

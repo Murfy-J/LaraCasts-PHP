@@ -41,7 +41,8 @@
                   </div>
                   Secured account and form submissions
                 </dt>
-                <dd class="mt-2 text-base leading-7 text-gray-600">ToDo: Adding Cross-site request forgeries prevention.
+                <dd class="mt-2 text-base leading-7 text-gray-600">Added Cross-site request forgeries prevention for
+                  forms. A csrf token is generated on initial visit then then regenerated at registration and login.
                 </dd>
               </div>
               <div class="relative pl-16">
