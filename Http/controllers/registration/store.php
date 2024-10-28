@@ -1,10 +1,8 @@
 <?php
 
-use Core\App;
-use Core\Authenticator;
-use Core\Database;
+use Core\Authenticator as Auth;
 use Http\Forms\RegistrationForm;
-
+use Http\Models\UserModel;
 
 $email = $_POST['email'];
 $password = $_POST['password'];
@@ -16,32 +14,21 @@ $form = RegistrationForm::validate($attributes = [
     'confirmpassword' => $_POST['confirmpassword']
 ]);
 
-$db = App::resolve(Database::class);
+$user = new UserModel();
 
-// check if the user email address already exists
-$checkUserExists = $db->query("SELECT * FROM users WHERE email = :email", [
-    ':email' => $email
-])->find();
-
-
-// If yes redirect to login form with email
-if ($checkUserExists) {
-    return redirect('/login');
+if ($user->findByEmail($email) === true) {
+    redirect('/login');
     exit;
 }
 
-$saveNewUser = $db->query("INSERT INTO users (email, password) VALUES (:email, :password)", [
-    ':email' => $email,
-    ':password' => password_hash($password, PASSWORD_DEFAULT),
+$createUser = $user->createUser([
+    'email' => $email,
+    'password' => $password
 ]);
 
-if ($saveNewUser) {
-
-    (new Authenticator)->login([
-        'email' => $email,
-    ]);
-
-    return redirect('/');
+if ($createUser) {
+    Auth::login($createUser);
+    exit;
 }
 
 

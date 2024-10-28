@@ -34,6 +34,7 @@ function authorize(bool $condition, int $status = Response::FORBIDDEN): void
 
         abort($status);
     }
+    exit;
 }
 
 function base_path(string $path): string

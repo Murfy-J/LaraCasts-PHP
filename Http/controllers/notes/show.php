@@ -2,23 +2,14 @@
 
 declare(strict_types=1);
 
-use Core\App;
-use Core\Database;
 use Core\User;
-
-$db = App::resolve(Database::class);
+use Http\Models\NotesModel;
 
 $heading = 'My Notes';
 $currentUserId = User::getUserID();
-
-
 $id = $_GET['id'];
 
-$note = $db->query('SELECT * FROM notes WHERE id = :id and user_id = :currentUserId', [
-    ':id' => $id,
-    ':currentUserId' => $currentUserId
-])->findOrFail();
-
+$note = (new NotesModel)->getNote($id);
 
 authorize($note['user_id'] === $currentUserId, 403);
 

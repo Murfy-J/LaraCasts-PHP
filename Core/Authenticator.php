@@ -36,8 +36,9 @@ class Authenticator
         $_SESSION['csrf_token'] = [];
         (new User)->newCsrfToken();
 
-
         session_regenerate_id(true);
+
+        redirect('/notes');
     }
 
     public function logout(): void

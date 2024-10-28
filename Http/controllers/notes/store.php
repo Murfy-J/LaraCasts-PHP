@@ -1,15 +1,10 @@
 <?php
 
-use Core\App;
-use Core\Database;
 use Core\User;
-use Core\Validator;
 use Http\Forms\NoteForm;
-
-$db = App::resolve(Database::class);
+use Http\Models\NotesModel;
 
 $currentUserId = User::getUserID();
-
 
 NoteForm::validate([
     'body' => $_POST['body']
@@ -17,9 +12,9 @@ NoteForm::validate([
 
 $body = htmlspecialchars($_POST['body']);
 
-$note = $db->query('INSERT INTO notes (`body`, `user_id`) VALUES (:body, :currentUserId)', [
-    'body' => $body,
-    'currentUserId' => $currentUserId
+(new NotesModel)->createNote([
+    'currentUserId' => $currentUserId,
+    'body' => $body
 ]);
 
 redirect('/notes

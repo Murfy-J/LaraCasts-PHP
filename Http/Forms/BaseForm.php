@@ -17,7 +17,7 @@ abstract class BaseForm
     }
 
     // All child classes will need to have this functions defined
-    abstract protected function validateAttributes(): void;
+    abstract public function validateAttributes(): void;
 
     /**
      * @throws ValidationException

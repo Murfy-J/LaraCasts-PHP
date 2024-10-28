@@ -2,22 +2,22 @@
 
 declare(strict_types=1);
 
-use Core\App;
-use Core\Database;
 use Core\User;
-
-$db = App::resolve(Database::class);
+use Http\Models\NotesModel;
 
 $heading = 'My Notes';
 
 $currentUserId = User::getUserID();
 
-$postID = $_POST["noteID"];
+$noteId = $_POST["noteID"];
 
-$note = $db->query("DELETE from notes where id = :id AND user_id = :currentUserId", [
-    "id" => $postID,
-    "currentUserId" => $currentUserId
-]);
+$db = new NotesModel;
+
+$note = $db->getNote($noteId);
+
+authorize($currentUserId === $note['user_id']);
+
+$db->deleteNote($noteId);
 
 redirect('/notes');
 die();

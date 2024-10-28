@@ -6,7 +6,7 @@ use Core\Validator;
 
 class RegistrationForm extends BaseForm
 {
-    protected function validateAttributes(): void
+    public function validateAttributes(): void
     {
         if (!Validator::email($this->attributes['email'])) {
             $this->error('email', "Please enter a valid email address");

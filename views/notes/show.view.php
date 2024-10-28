@@ -8,7 +8,10 @@
 
       <p class="mt-6"><a href="notes" class="text-green-500 hover:underline">Back to notes</a></p>
 
-      <div class="px-6">Note: <?= $note['body']; ?></div>
+      <div class="px-6 w-full flex flex-wrap break-words">
+        Note: <?= $note['body']; ?>
+      </div>
+
 
       <footer>
         <p class="mt-6">

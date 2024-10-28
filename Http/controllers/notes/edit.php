@@ -2,26 +2,30 @@
 
 declare(strict_types=1);
 
-use Core\App;
-use Core\Database;
 use Core\User;
-
-$db = App::resolve(Database::class);
+use Http\Models\NotesModel;
 
 $currentUser = User::getUserID();
+$id = $_GET['id'];
 
-$note = $db->query('SELECT * FROM notes WHERE id = :id', [
-    ':id' => $_GET['id']
-])->findOrFail();
+$db = new NotesModel;
 
-authorize($note['user_id'] === $currentUser);
+$note = $db->getNote($id);
 
-$heading = "Edit New Note";
+if ($note) {
+    authorize($note['user_id'] === $currentUser);
 
-view('notes/edit.view.php', [
-    'heading' => $heading,
-    'note' => $note,
-    'errors' => []
-]);
+    $heading = "Edit New Note";
+
+    view('notes/edit.view.php', [
+        'heading' => $heading,
+        'note' => $note,
+        'errors' => []
+    ]);
+}
+
+redirect('/notes');
+
+
 
 

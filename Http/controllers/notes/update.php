@@ -1,28 +1,23 @@
 <?php
 
-use Core\App;
-use Core\Database;
 use Core\User;
 use Http\Forms\NoteForm;
+use Http\Models\NotesModel;
 
 $id = $_POST['noteId'];
-$body = $_POST['body'];
+$body = htmlspecialchars($_POST['body']);
 
 $currentUserId = User::getUserID();
 
-NoteForm::validate([
-    'body' => $body
-]);
+NoteForm::validate(['body' => $body]);
 
-$db = App::resolve(Database::class);
+$db = new NotesModel;
 
-$note = $db->query('Select * from notes where id = :id', ['id' => $id])->findOrFail();
+$note = $db->getNote($id);
 
 authorize($currentUserId === $note['user_id']);
 
-$db->query('update notes set body = :body where id = :id', ['id' => $id, 'body' => $_POST['body']]);
-
-//redierct to notes
+$db->updateNote($note['id'], $body);
 
 redirect(' /notes
     ');
