@@ -44,12 +44,12 @@ class Database
 
     public function findOrFail(): false|array
     {
-
         $result = $this->find();
 
         if (!$result) {
-//             abort()
-            dd('We fucked up!');
+//            dd('We failed to find the record!');
+
+            abort();
         }
 
         return $result;

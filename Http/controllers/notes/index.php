@@ -1,13 +1,7 @@
 <?php
 
-use Core\App;
-use Core\Database;
 use Core\User;
 use Http\Models\NotesModel;
-
-$_SESSION['guestShop'] = [
-    'I AM' => 'Donkey'
-];
 
 $currentUserId = User::getUserID();
 

@@ -9,11 +9,18 @@ $heading = 'My Notes';
 $currentUserId = User::getUserID();
 $id = $_GET['id'];
 
-$note = (new NotesModel)->getNote($id);
+$db = new NotesModel;
 
-authorize($note['user_id'] === $currentUserId, 403);
+$note = $db->getNote($id);
 
-view('notes/show.view.php', [
-    'heading' => $heading,
-    'note' => $note
-]);
+if ($note) {
+    authorize($note['user_id'] === $currentUserId, 403);
+
+    view('notes/show.view.php', [
+        'heading' => $heading,
+        'note' => $note
+    ]);
+}
+
+
+

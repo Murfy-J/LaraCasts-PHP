@@ -2,12 +2,13 @@
 <?php require base_path('views/partials/nav.php'); ?>
 
 
-  <main class="min-h-[650px] bg-red-400">
-    <div class="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
-      <h1>Sorry, page not found</h1>
-      <p class="mt-5">
-        <a href="/" class="textxl">Back Home</a>
-      </p>
+  <main class="min-h-[650px]">
+    <div class=" flex flex-col items-center justify-between">
+      <h1 class="mt-6 text-2xl">I'm sure I left that response around here somewhere.....</h1>
+
+      <div class="mb-0">
+        <img src="/img/404img.png" alt="">
+      </div>
     </div>
   </main>
 

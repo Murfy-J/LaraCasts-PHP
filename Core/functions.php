@@ -28,13 +28,11 @@ function dd($value)
 }
 
 function authorize(bool $condition, int $status = Response::FORBIDDEN): void
-
 {
     if (!$condition) {
 
         abort($status);
     }
-    exit;
 }
 
 function base_path(string $path): string
